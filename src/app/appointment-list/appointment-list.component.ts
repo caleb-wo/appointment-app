@@ -12,7 +12,8 @@ export class AppointmentListComponent {
   appointments: Appointment[] = [];
 
   addAppointment(){
-    if (this.newAppointmentTitle.trim().length && this.newAppointmentDate){
+    if (this.newAppointmentTitle.trim().length 
+        && this.newAppointmentDate){
       this.appointments.push({
         id: Date.now(),
         title: this.newAppointmentTitle,
@@ -21,10 +22,13 @@ export class AppointmentListComponent {
 
       this.newAppointmentTitle = "";
       this.newAppointmentDate = new Date();
+
+      localStorage.setItem("appointments", JSON.stringify(this.appointments));
     }
   }
 
   deleteAppointment(idx: number){
     this.appointments.splice(idx, 1);
+    localStorage.setItem("appointments", JSON.stringify(this.appointments));
   }
 }
