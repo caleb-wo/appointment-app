@@ -8,7 +8,8 @@
         <li>
             {{ appointment.title }}
             {{ appointment.date | date:"dd.MM.yyyy" }}
+
+            <button (click)="deleteAppointment($index)" >Delete</button>
         </li>
-        <button>Delete</button>
     }
 </ul>
