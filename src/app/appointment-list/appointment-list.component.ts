@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { Appointment } from '../models/appointment'
+import { Appointment } from '../models/appointment';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-appointment-list',
   templateUrl: './appointment-list.component.html',
   styleUrl: './appointment-list.component.css'
 })
-export class AppointmentListComponent {
+export class AppointmentListComponent implements OnInit {
   newAppointmentTitle: string = "";
   newAppointmentDate: Date = new Date();
   appointments: Appointment[] = [];
@@ -30,5 +31,11 @@ export class AppointmentListComponent {
   deleteAppointment(idx: number){
     this.appointments.splice(idx, 1);
     localStorage.setItem("appointments", JSON.stringify(this.appointments));
+  }
+
+  ngOnInit(): void {
+    let savedAppointments = localStorage.getItem("appointments");
+
+    this.addAppointment = savedAppointments ? JSON.parse(savedAppointments) : [];
   }
 }
